@@ -1,0 +1,3 @@
+package org.tumasha.web_driver
+
+interface TafWebDriverFactory

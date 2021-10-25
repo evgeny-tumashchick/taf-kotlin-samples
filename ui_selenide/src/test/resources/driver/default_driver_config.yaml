@@ -1,0 +1,16 @@
+webdriverHostConfigByEnv:
+  DEFAULT: 127.0.0.1
+webdriverPort: 4444
+driverType: LOCAL
+browser: CHROME
+headlessMode: false
+gridNodIdName: ciNodeBR
+chromeVersion: 93.0.4577.63
+firefoxVersion: 0.26.0
+browserStartMaximize: false
+browserScreenSize: 1600x900
+browserPageLoadStrategy: normal
+implicitTimeoutSeconds: 10
+pageLoadedTimeoutMilliseconds: 30000
+scriptTimeoutSeconds: 10
+selenideWaitElementTimeoutMilliseconds: 10000
