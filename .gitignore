@@ -29,4 +29,9 @@ build
 out
 gen
 .allure
-/mm-automation/**/allure-results/
+/taf-kotlin-samples/**/allure-results/
+
+
+# Gradle
+.gradle
+/gradle/wrapper
