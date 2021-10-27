@@ -26,12 +26,12 @@ internal class WebDriverConfigProvider : DynamicConfigField {
     }
   }
 
-  private fun getWebDriverHostConfig(): String {
+  private fun getWebDriverHostConfig(): String? {
     var driverHost: String? = TafSystemProperties.WEBDRIVER_HOST.get()
     if (driverHost.isNullOrEmpty()) {
       var env = TafSystemProperties.ENV.getOrDefault(driverHostDefaultEnv).uppercase()
       if (!driverConfig.webdriverHostConfigByEnv.containsKey(env)) env = driverHostDefaultEnv
-      driverHost = driverConfig.webdriverHostConfigByEnv[env].getDynamicFieldOrThrowConfigException("webdriverHost")
+      driverHost = driverConfig.webdriverHostConfigByEnv[env]
     }
     return driverHost
   }

@@ -1,9 +1,9 @@
 package org.tumasha.web_driver.configuration.model
 
+import org.timasha.config.DynamicConfigField
 import org.tumasha.web_driver.configuration.BrowserType
 
 data class WebDriverConfig(
-  var webdriverHost: String?,
   var webdriverHostConfigByEnv: Map<String, String>,
   var webdriverPort: String,
   var driverType: WebDriverType,
@@ -19,6 +19,9 @@ data class WebDriverConfig(
   var pageLoadedTimeoutMilliseconds: Long,
   var scriptTimeoutSeconds: Long,
   var selenideWaitElementTimeoutMilliseconds: Long
-) {
+): DynamicConfigField {
+  var webdriverHost: String? = null
+    get() = field.getDynamicFieldOrThrowConfigException("webdriverHost")
+
   fun isRemoteDriver(): Boolean = WebDriverType.REMOTE == driverType
 }

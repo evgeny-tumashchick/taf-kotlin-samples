@@ -11,7 +11,7 @@ enum class TafSystemProperties(val value: String) : SystemProperties {
   WEBDRIVER_BROWSER_FIREFOX("webdriver.browser.firefox"),
   ENV("env"),
   USER_DIR("user.dir"),
-  DYNAMIC_HOST("DYNAMIC_HOST");
+  DYNAMIC_PARAM("DYNAMIC_PARAM");
 
   override fun getName(): String = this.value
 }
