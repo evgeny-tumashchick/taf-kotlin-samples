@@ -1,7 +1,6 @@
 package org.tumasha.web_driver
 
 import org.timasha.logger.CustomLogger
-import org.tumasha.web_driver.configuration.BrowserType
 import org.tumasha.web_driver.configuration.model.WebDriverConfig
 
 abstract class WebDriverManager {
@@ -10,10 +9,6 @@ abstract class WebDriverManager {
   lateinit var driverConfig: WebDriverConfig
 
   protected abstract fun setDriverFactory(): TafWebDriverFactory
-
-  fun isDriverStartConfigRemote(): Boolean = driverConfig.isRemoteDriver()
-  fun isBrowserChrome(): Boolean = BrowserType.CHROME == driverConfig.browser
-  fun isBrowserFirefox(): Boolean = BrowserType.FIREFOX == driverConfig.browser
 
   protected fun logDriverStartConfig() {
     val driverStartConfig = """
