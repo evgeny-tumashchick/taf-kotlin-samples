@@ -1,19 +1,18 @@
 package org.tumasha.web_driver.ui.driver.remote
 
-import com.codeborne.selenide.Selenide
 import org.junit.jupiter.api.AfterAll
 import org.junit.jupiter.api.AfterEach
-import org.junit.jupiter.api.Assertions
 import org.junit.jupiter.api.BeforeAll
 import org.junit.jupiter.params.ParameterizedTest
 import org.junit.jupiter.params.provider.ValueSource
 import org.timasha.properties.TafSystemProperties
 import org.tumasha.TafUiBaseTest
+import org.tumasha.browser.SelenideBrowser
+import org.tumasha.page.bookstore.books.BookStoreBooksPage
 import org.tumasha.web_driver.selenide.SelenideWebDriverManager
 
 class TafRemoteSelenideDriverTest : TafUiBaseTest() {
-  private val sourceToOpen = "https://www.onliner.by"
-  private val sourceTitle = "Onliner"
+  private val bookstoreBooksPage by lazy { BookStoreBooksPage() }
 
   @BeforeAll
   fun setupRemoteExecutionConfig() {
@@ -27,7 +26,7 @@ class TafRemoteSelenideDriverTest : TafUiBaseTest() {
 
   @AfterEach
   fun removeBrowserTypeConfig() {
-    Selenide.closeWebDriver()
+    SelenideBrowser.closeBrowser()
     TafSystemProperties.WEBDRIVER_BROWSER_NAME.clear()
     TafSystemProperties.WEBDRIVER_NODE_ID.clear()
   }
@@ -37,8 +36,10 @@ class TafRemoteSelenideDriverTest : TafUiBaseTest() {
   fun `WebDriver Remote Use Default Driver Config`(browserName: String) {
     TafSystemProperties.WEBDRIVER_BROWSER_NAME.set(browserName)
     SelenideWebDriverManager.setSelenideWebDriverConfiguration()
-    Selenide.open(sourceToOpen)
-    Assertions.assertEquals(sourceTitle, Selenide.title())
+    bookstoreBooksPage.apply {
+      openPage()
+      verifyIsOnPage()
+    }
   }
 
   @ParameterizedTest(name = "Selenide remote use nodeId config and BrowserType [{arguments}]")
@@ -47,7 +48,9 @@ class TafRemoteSelenideDriverTest : TafUiBaseTest() {
     TafSystemProperties.WEBDRIVER_BROWSER_NAME.set(browserName)
     TafSystemProperties.WEBDRIVER_NODE_ID.set("tafNode")
     SelenideWebDriverManager.setSelenideWebDriverConfiguration()
-    Selenide.open(sourceToOpen)
-    Assertions.assertEquals(sourceTitle, Selenide.title())
+    bookstoreBooksPage.apply {
+      openPage()
+      verifyIsOnPage()
+    }
   }
 }

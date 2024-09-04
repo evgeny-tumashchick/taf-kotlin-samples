@@ -1,19 +1,18 @@
 package org.tumasha.web_driver.ui.driver.browsermode
 
-import com.codeborne.selenide.Selenide
 import org.junit.jupiter.api.AfterAll
 import org.junit.jupiter.api.AfterEach
-import org.junit.jupiter.api.Assertions
 import org.junit.jupiter.api.BeforeAll
 import org.junit.jupiter.params.ParameterizedTest
 import org.junit.jupiter.params.provider.ValueSource
 import org.timasha.properties.TafSystemProperties
 import org.tumasha.TafUiBaseTest
+import org.tumasha.browser.SelenideBrowser
+import org.tumasha.page.bookstore.books.BookStoreBooksPage
 import org.tumasha.web_driver.selenide.SelenideWebDriverManager
 
 class TafBrowserModeSelenideDriverTest : TafUiBaseTest() {
-  private val sourceToOpen = "https://www.onliner.by"
-  private val sourceTitle = "Onliner"
+  private val bookstoreBooksPage by lazy { BookStoreBooksPage() }
 
   @BeforeAll
   fun setupRemoteExecutionConfig() {
@@ -29,7 +28,7 @@ class TafBrowserModeSelenideDriverTest : TafUiBaseTest() {
   fun removeBrowserTypeConfig() {
     TafSystemProperties.WEBDRIVER_BROWSER_HEADLESS.clear()
     TafSystemProperties.WEBDRIVER_BROWSER_NAME.clear()
-    Selenide.closeWebDriver()
+    SelenideBrowser.closeBrowser()
   }
 
   @ParameterizedTest(name = "Selenide driver Chrome browser Use Browser Headless mode set to [{arguments}]")
@@ -38,8 +37,10 @@ class TafBrowserModeSelenideDriverTest : TafUiBaseTest() {
     TafSystemProperties.WEBDRIVER_BROWSER_NAME.set("chrome")
     TafSystemProperties.WEBDRIVER_BROWSER_HEADLESS.set(browserMode)
     SelenideWebDriverManager.setSelenideWebDriverConfiguration()
-    Selenide.open(sourceToOpen)
-    Assertions.assertEquals(sourceTitle, Selenide.title())
+    bookstoreBooksPage.apply {
+      openPage()
+      verifyIsOnPage()
+    }
   }
 
   @ParameterizedTest(name = "Selenide driver Firefox browser Use Browser Headless mode set to [{arguments}]")
@@ -48,7 +49,9 @@ class TafBrowserModeSelenideDriverTest : TafUiBaseTest() {
     TafSystemProperties.WEBDRIVER_BROWSER_NAME.set("firefox")
     TafSystemProperties.WEBDRIVER_BROWSER_HEADLESS.set(browserMode)
     SelenideWebDriverManager.setSelenideWebDriverConfiguration()
-    Selenide.open(sourceToOpen)
-    Assertions.assertEquals(sourceTitle, Selenide.title())
+    bookstoreBooksPage.apply {
+      openPage()
+      verifyIsOnPage()
+    }
   }
 }
