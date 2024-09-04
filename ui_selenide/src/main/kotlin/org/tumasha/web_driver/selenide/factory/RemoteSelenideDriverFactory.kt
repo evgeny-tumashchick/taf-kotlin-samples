@@ -2,11 +2,13 @@ package org.tumasha.web_driver.selenide.factory
 
 import com.codeborne.selenide.Configuration
 import org.openqa.selenium.remote.DesiredCapabilities
+import org.timasha.url.UrlService
 import org.tumasha.web_driver.configuration.BrowserType
 import org.tumasha.web_driver.configuration.model.WebDriverConfig
 
-class RemoteSelenideDriverFactory(private val driverConfig: WebDriverConfig) :
-  DefaultSelenideDriverFactory(driverConfig) {
+class RemoteSelenideDriverFactory(
+  private val driverConfig: WebDriverConfig
+) : DefaultSelenideDriverFactory(driverConfig) {
 
   private fun configBrowserRelatedDriver() {
     return when (driverConfig.browser) {
@@ -24,7 +26,7 @@ class RemoteSelenideDriverFactory(private val driverConfig: WebDriverConfig) :
 
   override fun configDriver() {
     configBrowserRelatedDriver()
-    Configuration.remote = "http://${driverConfig.webdriverHost}:${driverConfig.webdriverPort}/wd/hub"
+    Configuration.remote = driverConfig.run { "${UrlService.HTTP_PREFIX}${webdriverHost}:${webdriverPort}/wd/hub" }
     Configuration.browserCapabilities.merge(getDefaultCapabilities())
   }
 }
