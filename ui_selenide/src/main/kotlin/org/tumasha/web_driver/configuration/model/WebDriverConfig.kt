@@ -1,10 +1,11 @@
 package org.tumasha.web_driver.configuration.model
 
 import org.timasha.config.DynamicConfigField
+import org.timasha.execution.environment.ExecutionEnvironmentType
 import org.tumasha.web_driver.configuration.BrowserType
 
 data class WebDriverConfig(
-  var webdriverHostConfigByEnv: Map<String, String>,
+  var webdriverHostConfigByEnv: Map<ExecutionEnvironmentType, String>,
   var webdriverPort: String,
   var driverType: WebDriverType,
   var browser: BrowserType,
@@ -18,7 +19,7 @@ data class WebDriverConfig(
   var pageLoadedTimeoutMilliseconds: Long,
   var scriptTimeoutSeconds: Long,
   var selenideWaitElementTimeoutMilliseconds: Long
-): DynamicConfigField {
+) : DynamicConfigField {
   var webdriverHost: String? = null
     get() = field.getDynamicFieldOrThrowConfigException("webdriverHost")
 

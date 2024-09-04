@@ -16,6 +16,6 @@ interface DynamicConfigField {
   }
 
   fun String?.getDynamicFieldOrThrowConfigException(fieldName: String): String {
-    return processDynamicValue(this) ?: throw IllegalStateException("$fieldName isn't initialized")
+    return processDynamicValue(this) ?: error("$fieldName isn't initialized")
   }
 }

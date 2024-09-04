@@ -1,5 +1,6 @@
 webdriverHostConfigByEnv:
   DEFAULT: 127.0.0.1
+  DYNAMIC_ENV: DYNAMIC_PARAM
 webdriverPort: 4444
 driverType: LOCAL
 browser: CHROME

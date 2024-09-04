@@ -2,6 +2,9 @@ package org.tumasha.web_driver.configuration.provider
 
 import org.timasha.config.DynamicConfigField
 import org.timasha.convert.FileConvert.resourceFileToObject
+import org.timasha.execution.environment.ExecutionEnvironmentProvider
+import org.timasha.execution.environment.ExecutionEnvironmentProvider.DEFAULT_EXECUTION_ENVIRONMENT
+import org.timasha.execution.environment.ExecutionEnvironmentType
 import org.timasha.properties.TafSystemProperties
 import org.tumasha.web_driver.configuration.BrowserType
 import org.tumasha.web_driver.configuration.model.WebDriverConfig
@@ -10,7 +13,6 @@ import org.tumasha.web_driver.configuration.model.WebDriverType.valueOf
 
 internal class WebDriverConfigProvider : DynamicConfigField {
   private val driverDefaultConfigFile: String = "driver/default_driver_config.yaml"
-  private val driverHostDefaultEnv: String = "DEFAULT"
   private val driverConfig: WebDriverConfig = resourceFileToObject(filePath = driverDefaultConfigFile)
 
   fun getDriverConfig(): WebDriverConfig {
@@ -29,8 +31,8 @@ internal class WebDriverConfigProvider : DynamicConfigField {
   private fun getWebDriverHostConfig(): String? {
     var driverHost: String? = TafSystemProperties.WEBDRIVER_HOST.get()
     if (driverHost.isNullOrEmpty()) {
-      var env = TafSystemProperties.ENVIRONMENT.getOrDefault(driverHostDefaultEnv).uppercase()
-      if (!driverConfig.webdriverHostConfigByEnv.containsKey(env)) env = driverHostDefaultEnv
+      var env: ExecutionEnvironmentType = ExecutionEnvironmentProvider.getExecutionEnvironment()
+      if (!driverConfig.webdriverHostConfigByEnv.containsKey(env)) env = DEFAULT_EXECUTION_ENVIRONMENT
       driverHost = driverConfig.webdriverHostConfigByEnv[env]
     }
     return driverHost
