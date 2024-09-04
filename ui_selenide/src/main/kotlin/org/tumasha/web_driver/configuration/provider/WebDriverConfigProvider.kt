@@ -1,7 +1,7 @@
 package org.tumasha.web_driver.configuration.provider
 
 import org.timasha.config.DynamicConfigField
-import org.timasha.convert.resourceFileToObject
+import org.timasha.convert.IdfFileConvert.resourceFileToObject
 import org.timasha.properties.TafSystemProperties
 import org.tumasha.web_driver.configuration.BrowserType
 import org.tumasha.web_driver.configuration.model.WebDriverConfig
