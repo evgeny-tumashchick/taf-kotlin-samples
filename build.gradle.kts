@@ -1,18 +1,22 @@
 import org.gradle.plugins.ide.idea.model.IdeaLanguageLevel
+import org.jetbrains.kotlin.gradle.dsl.JvmTarget.JVM_17
 import org.jetbrains.kotlin.gradle.tasks.KotlinCompile
+
+val projectJdkVersion: String = JavaVersion.VERSION_17.toString()
+val projectJavaLanguageVersion: JavaLanguageVersion = JavaLanguageVersion.of(projectJdkVersion)
 
 group = "org.tumasha"
 version = "1.0-SNAPSHOT"
 
 plugins {
-  kotlin("jvm") version "1.5.31" apply false
+  kotlin("jvm") version "2.0.20" apply false
   idea
 }
 
 idea {
   project {
-    jdkName = "1.8"
-    languageLevel = IdeaLanguageLevel("1.8")
+    jdkName = projectJdkVersion
+    languageLevel = IdeaLanguageLevel(projectJdkVersion)
   }
   module.name = "taf-kotlin-samples"
 }
@@ -39,9 +43,7 @@ subprojects {
   }
 
   tasks {
-    withType<KotlinCompile> {
-      kotlinOptions.jvmTarget = "1.8"
-    }
+    withType<KotlinCompile> { compilerOptions { jvmTarget.set(JVM_17) } }
   }
 
   tasks.withType<Test> {
@@ -52,8 +54,9 @@ subprojects {
   tasks.register<Test>("internalTest") {
     include("org/tumasha/**")
     reports {
-      junitXml.isEnabled = false
-      html.isEnabled = true
+      junitXml.required.set(false)
+      html.required.set(true)
     }
   }
+  
 }
