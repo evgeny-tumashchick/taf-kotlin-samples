@@ -39,7 +39,7 @@ object CustomLogger : LogInstance {
     log.set(null)
   }
 
-  fun getLogsPathToFile(testMethodName: String, testName: String): Path {
+  private fun getLogsPathToFile(testMethodName: String, testName: String): Path {
     return Paths.get(
       String.format(
         logFilePathPattern,
