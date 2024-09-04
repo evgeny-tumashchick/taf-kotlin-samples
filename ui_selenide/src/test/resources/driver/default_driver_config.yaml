@@ -7,7 +7,6 @@ headlessMode: false
 gridNodIdName: tafSeleniumNode
 chromeVersion: 127.0.6533.119
 firefoxVersion: 0.26.0
-browserStartMaximize: false
 browserScreenSize: 1600x900
 browserPageLoadStrategy: normal
 implicitTimeoutSeconds: 10

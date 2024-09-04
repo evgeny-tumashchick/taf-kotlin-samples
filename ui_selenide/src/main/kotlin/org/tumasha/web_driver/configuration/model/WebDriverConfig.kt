@@ -12,7 +12,6 @@ data class WebDriverConfig(
   var gridNodIdName: String,
   var chromeVersion: String,
   var firefoxVersion: String,
-  var browserStartMaximize: Boolean,
   var browserScreenSize: String,
   var browserPageLoadStrategy: String,
   var implicitTimeoutSeconds: Long,

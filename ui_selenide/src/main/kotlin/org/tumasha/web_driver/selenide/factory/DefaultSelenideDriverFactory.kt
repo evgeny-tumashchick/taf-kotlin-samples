@@ -16,7 +16,6 @@ abstract class DefaultSelenideDriverFactory(private val driverConfig: WebDriverC
 
   protected fun setSelenideDefaultDriverConfig() {
     Configuration.browser = driverConfig.browser.browserName
-    Configuration.startMaximized = driverConfig.browserStartMaximize
     Configuration.browserSize = driverConfig.browserScreenSize
     Configuration.timeout = driverConfig.selenideWaitElementTimeoutMilliseconds
     Configuration.pageLoadTimeout = driverConfig.pageLoadedTimeoutMilliseconds
