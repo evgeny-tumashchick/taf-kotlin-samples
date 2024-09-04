@@ -4,8 +4,8 @@ webdriverPort: 4444
 driverType: LOCAL
 browser: CHROME
 headlessMode: false
-gridNodIdName: ciNodeBR
-chromeVersion: 93.0.4577.63
+gridNodIdName: tafSeleniumNode
+chromeVersion: 127.0.6533.119
 firefoxVersion: 0.26.0
 browserStartMaximize: false
 browserScreenSize: 1600x900

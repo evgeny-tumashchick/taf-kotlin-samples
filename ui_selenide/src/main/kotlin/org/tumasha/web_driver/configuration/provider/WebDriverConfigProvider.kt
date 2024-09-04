@@ -21,15 +21,15 @@ internal class WebDriverConfigProvider : DynamicConfigField {
       driverType = getSeleniumDriverTypeConfig()
       browser = getBrowserNameConfig()
       headlessMode = getBrowserModeConfig()
-      chromeVersion = TafSystemProperties.WEBDRIVER_BROWSER_CHROME.getOrDefault(driverConfig.chromeVersion)
-      firefoxVersion = TafSystemProperties.WEBDRIVER_BROWSER_FIREFOX.getOrDefault(driverConfig.firefoxVersion)
+      chromeVersion = TafSystemProperties.WEBDRIVER_CHROME_VERSION.getOrDefault(driverConfig.chromeVersion)
+      firefoxVersion = TafSystemProperties.WEBDRIVER_FIREFOX_VERSION.getOrDefault(driverConfig.firefoxVersion)
     }
   }
 
   private fun getWebDriverHostConfig(): String? {
     var driverHost: String? = TafSystemProperties.WEBDRIVER_HOST.get()
     if (driverHost.isNullOrEmpty()) {
-      var env = TafSystemProperties.ENV.getOrDefault(driverHostDefaultEnv).uppercase()
+      var env = TafSystemProperties.ENVIRONMENT.getOrDefault(driverHostDefaultEnv).uppercase()
       if (!driverConfig.webdriverHostConfigByEnv.containsKey(env)) env = driverHostDefaultEnv
       driverHost = driverConfig.webdriverHostConfigByEnv[env]
     }
