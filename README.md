@@ -119,6 +119,7 @@ example:
 
 ```bash
 ./gradlew test -Dwebdriver.type=chrome -Dwebdriver.browser.headless=true
+```
 
 ## Author and Contact Information
 
