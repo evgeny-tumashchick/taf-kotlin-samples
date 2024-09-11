@@ -191,7 +191,7 @@ into Kotlin objects using Jackson's `ObjectMapper` with Kotlin-specific configur
 
 #### Key Features:
 
-- **File to Object Conversion**: Converts YAML files into objects of any specified type.
+- **File to Generic Object Conversion**: Converts YAML files into objects of any specified type.
 - **Reflection Cache Size**: Optimizes reflection-based access with a configurable cache size.
 - **Null Handling**: Configurable null handling for collections, maps, and default values.
 - **Singleton Support**: Optionally enables singleton support for Kotlin objects during deserialization.
@@ -285,7 +285,7 @@ class Configuration : DynamicConfigField {
 If the system property DYNAMIC_PARAM is set during runtime, for instance:
 
 ```bash
--DYNAMIC_PARAM=example.com
+./gradlew test -DYNAMIC_PARAM=example.com
 ```
 
 Accessing the host property from your configuration object will automatically replace the placeholder with the system
